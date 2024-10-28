@@ -16,6 +16,12 @@ jobs:
           :: Output all environment variables for debugging
           set
 
+          :: Check related environment variables
+          echo Checking related environment variables...
+          echo INCLUDE: %INCLUDE%
+          echo LIB: %LIB%
+          echo PATH: %PATH%
+          
           :: Check if the VCToolsRedistDir variable is set
           if not defined VCToolsRedistDir (
             echo Error: Environment variable VCToolsRedistDir is not set.
@@ -23,4 +29,3 @@ jobs:
           ) else (
             echo VCToolsRedistDir is set to: %VCToolsRedistDir%
           )
-
