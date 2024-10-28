@@ -9,15 +9,14 @@ jobs:
     runs-on: windows-2019
     steps:
       - name: Check if VCToolsRedistDir exists
-        shell: pwsh
+        shell: cmd
         run: |
-          # Call the vcvarsall.bat to set up the environment
-          & "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
           
-          # Check if the VCToolsRedistDir variable is set
-          if (-not $env:VCToolsRedistDir) {
-            Write-Host "Error: Environment variable VCToolsRedistDir is not set."
-            exit 1
-          } else {
-            Write-Host "VCToolsRedistDir is set to: $env:VCToolsRedistDir"
-          }
+          :: Check if the VCToolsRedistDir variable is set
+          if not defined VCToolsRedistDir (
+            echo Error: Environment variable VCToolsRedistDir is not set.
+            exit /b 1
+          ) else (
+            echo VCToolsRedistDir is set to: %VCToolsRedistDir%
+          )
